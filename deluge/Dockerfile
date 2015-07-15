@@ -20,14 +20,15 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
    apache2-utils
 
 ENV USER root
-
+RUN mkdir /data
+RUN mkdir /app
 VOLUME ["/data","/app"]
 WORKDIR /app
 
 #RUN useradd -m -s /bin/nologin deluge
-RUN deluge sh -c "deluged; sleep 5; killall deluged"
-RUN deluge sh -c "echo \"deluge:deluge:10\" >> /app/.config/deluge/auth"
-RUN deluge sh -c "deluged && sleep 10 && deluge-console \"config -s allow_remote True\" && deluge-console \"config allow_remote\" && killall deluged"
+RUN sh -c "deluged; sleep 5; killall deluged"
+RUN sh -c "echo \"deluge:deluge:10\" >> /app/.config/deluge/auth"
+RUN sh -c "deluged && sleep 10 && deluge-console \"config -s allow_remote True\" && deluge-console \"config allow_remote\" && killall deluged"
 RUN mkdir -p /etc/service/deluged; mkdir -p /etc/service/deluge-web; mkdir -p /etc/service/php5-fpm; mkdir -p /etc/service/nginx
 
 

@@ -9,7 +9,8 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
   tightvncserver
 # Set user for VNC server (USER is only for build)
 ENV USER root
-
+RUN mkdir /data
+RUN mkdir /app
 VOLUME ["/data","/app"]
 WORKDIR /app
 
