@@ -1,0 +1,24 @@
+#!/bin/bash
+sudo -u deluge sh -c "mkdir -p /data/incomplete; mkdir -p /data/complete; mkdir -p /data/watch; mkdir -p /data/torrentfiles"
+rm -f /app/.config/deluge/deluge.pid
+#chown -R deluge:deluge /home/deluge
+if [ ! -f /app/.config/deluge/auth ]; then
+    echo "auth not found, creating"
+    sudo -u deluge sh -c "mkdir -p /app/.config/deluge && echo \"deluge:deluge:10\" > /app/.config/deluge/auth"
+fi
+if [ ! -f /app/.config/deluge/core.conf ]; then
+    echo "config not found, creating"
+    sudo -u deluge mkdir -p /app/.config/deluge && cp /tmp/core.conf /app/.config/deluge/core.conf
+    chown deluge:deluge /app/.config/deluge/core.conf
+fi
+if [ ! -f /app/.htpasswd ]; then
+    echo "creating .htpasswd"
+    htpasswd -c -b /app/.htpasswd deluge deluge
+fi
+if [ ! -f /data/complete/_h5ai/.htaccess ]; then
+    echo "installing h5ai"
+    wget -O /data/complete/h5ai.zip http://release.larsjung.de/h5ai/h5ai-0.26.1.zip && unzip -qq -d /data/complete/ /data/complete/h5ai.zip
+    rm -f /data/complete/h5ai.zip #&& chown -R deluge:deluge /home/deluge/complete && chmod -R a+w /home/deluge/complete/_h5ai
+fi
+#exec sudo -u deluge deluged -d
+exec deluge deluged -d
