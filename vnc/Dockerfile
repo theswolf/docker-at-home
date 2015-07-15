@@ -13,6 +13,7 @@ ENV USER root
 COPY password.txt .
 RUN cat password.txt password.txt | vncpasswd && \
   rm password.txt
+  
 # Expose VNC port
 EXPOSE 5901
 
