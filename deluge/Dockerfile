@@ -1,4 +1,4 @@
-FROM theswolf/basement
+FROM ubuntu:trusty
 MAINTAINER Christian Geymonat <chris.geymo@gmail.com>
 
 # Install components
@@ -19,8 +19,8 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
    imagemagick \
    apache2-utils
 
-ENV USER root
-
+RUN mkdir /data
+RUN mkdir /app
 VOLUME ["/data","/app"]
 WORKDIR /app
 

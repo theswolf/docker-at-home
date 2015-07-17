@@ -1,1 +1,1 @@
-{"mixinTypes":["contribution"],"builders":{"configs":{},"default":"ant"},"runners":{"configs":{"system:/java/codenvy-cli":{"ram":1000,"variables":{},"options":{}}},"default":"system:/java/codenvy-cli"},"type":"blank","attributes":{"contribute_branch":["master"],"contribute_mode":["contribute"]}}
+{"mixinTypes":["contribution"],"builders":{"configs":{}},"runners":{"configs":{}},"description":"","type":"blank","attributes":{"contribute_branch":["master"],"contribute_mode":["contribute"]}}
